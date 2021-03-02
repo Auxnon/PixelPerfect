@@ -63,22 +63,33 @@
     		position: relative;
     		width: auto;
     		height: 50vh;
-    		background: red;
+    		background: gray;
+            overflow-x: scroll;
     	}
     	section{
     		top: 0;
-    		position: absolute;
+    		position: relative;
+            display: inline-block;
     		margin: 16px;
     		border-radius: 24px;
     		background: #8AE49E;
-    		width: 144px;
-    		height: 256px;
+    		width: 192px;
+    		height: 288px;
     	}
     	.suggestion{
     		position: relative;
     		height: 64px;
     	}
+        .suggestion section{
+            background: none;
+            width: 100%;
+        }
+        .suggestion .details{
+            display: inline-block;
+        }
     	img{
+            width: 128px;
+            height: 128px;
     		background: #84BD5BFF;
     		border-radius: 16px;
     	}
@@ -108,6 +119,15 @@
     		background-repeat: no-repeat;
     		background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 7h-2v4H7v2h4v4h2v-4h4v-2h-4V7zm-1-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>');
     	}
+        .price{
+            color: red;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .weight{
+            font-size: 0.8em;
+            color: var(--light-color);
+        }
 
 
     </style>
@@ -126,13 +146,22 @@
             	<img src="" alt="">
             	<div class="details">
 	        		<h4>Lemon</h4>
-	        		<span class="weight">250g</span>
-	        		<span class="price"></span>
+	        		<div class="weight">250g</div>
+	        		<div class="price">$28.0</div>
 	        		<button class="add"></button>
 	        	</div>
             </section>
+            <section>
+                <img src="" alt="">
+                <div class="details">
+                    <h4>Pineapple</h4>
+                    <div class="weight">500g</div>
+                    <div class="price">$68.0</div>
+                    <button class="add"></button>
+                </div>
+            </section>
         </div>
-        <nav>
+        <nav> 
             <button>Hot</button>
             <button>New</button>
             <button>All</button>
@@ -142,8 +171,8 @@
         	<img src="./assets/lemon.png" alt="">
         	<div class="details">
         		<h4>Lemon</h4>
-        		<span class="weight">250g</span>
-        		<span class="price"></span>
+        		<div class="weight">250g</div>
+        		<div class="price">$18.0</div>
         		<button class="add"></button>
         	</div>
         </section>
