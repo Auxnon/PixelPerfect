@@ -10,6 +10,7 @@
 
 <body>
     <main>
+        <div class="bottom-menu">
         <div class="header">
             <h1>Fresh Fruits</h2>
                 <p class="heading">We have more than 100 fruits</p>
@@ -21,7 +22,7 @@
                 <img src="assets/avocado.png" alt="">
                 <div class="details">
                     <h2>Avocado</h2>
-                    <div class="weight">250g</div>
+                    <div class="subtle">250g</div>
                     <div class="price">$ 28.0<button class="add"></button></div>
                 </div>
             </section>
@@ -29,7 +30,7 @@
                 <img src="assets/pineapple.png" alt="">
                 <div class="details">
                     <h2>Pineapple</h2>
-                    <div class="weight">500g</div>
+                    <div class="subtle">500g</div>
                     <div class="price">$ 68.0<button class="add"></button></div>
                 </div>
             </section>
@@ -37,7 +38,7 @@
                 <img src="assets/pineapple.png" alt="">
                 <div class="details">
                     <h2>Apple</h2>
-                    <div class="weight">100g</div>
+                    <div class="subtle">100g</div>
                     <div class="price">$ 256.0<button class="add"></button></div>
                 </div>
             </section>
@@ -45,7 +46,7 @@
                 <img src="assets/pineapple.png" alt="">
                 <div class="details">
                     <h2>Pear</h2>
-                    <div class="weight">1000g</div>
+                    <div class="subtle">1000g</div>
                     <div class="price">$ 720.0<button class="add"></button></div>
                 </div>
             </section>
@@ -60,30 +61,112 @@
                 <img src="./assets/lemon.png" alt="">
                 <div class="details">
                     <h2>Lemon</h2>
-                    <div class="weight">250g</div>
+                    <div class="subtle">250g</div>
                     <div class="price">$ 18.0 <button class="add"></button></div>
                 </div>
             </section>
         </div>
+        </div>
+
+        <div class="midlayer-menu"></div>
+
+        <div class="overlay-menu">
+            <div class="header">
+                <h1>Avocado</h1>
+                <p class="heading">Anti Aging</p>
+                <div class="subtle">1000g</div>
+            </div>
+            <div class="price-row">
+                <div class="dot"></div>
+                <hr>
+                <div class="price">$ 28.00</div>
+            </div>
+            <div class="subtle">Focus on domestic and foreign fruit nine years selecting only seasonal fruit for you.</div>
+            <div class="badge-container">
+                <div class="badge safe">Safe</div>
+                <div class="badge detection">Detection</div>
+                <div class="badge business">Business</div>
+            </div>
+            <div class="badge-container">
+                <button class="badge add"></button>
+                <button class="badge favorite"></button>
+            </div>
+        </div>
     </main>
+    <div class="back-button"></div>
 </body>
 <script>
+let midlayerMenu;
+let overlayMenu;
+let backButton;
+
 function init() {
-    let nav=document.querySelector('nav')
+    midlayerMenu = document.querySelector('.midlayer-menu')
+    overlayMenu= document.querySelector('.overlay-menu')
+    backButton=document.querySelector('.back-button')
+    backButton.addEventListener('click',ev=>{
+        Object.values(midlayerMenu.children).forEach(child=>{
+            child.style.transform='translate(0,100%)'
+            setTimeout(()=>{
+                child.remove();
+            },600)
+            
+        })
+        backButton.style.display=''
+        overlayMenu.style.transform='translate(0,100%)'
+    })
+    let nav = document.querySelector('nav')
     nav.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', ev => {
-            ev.target.className = 'selected'
+            nav.querySelectorAll('.selected').forEach(ele => {
+                ele.classList.remove('selected')
+            });
+            ev.target.className = 'selected';
+
         })
     })
+    document.querySelectorAll('section').forEach(section => {
+        section.addEventListener('click', ev => {
+            let rect = section.getBoundingClientRect()
+            let dupe = section.cloneNode()
+            let img=section.firstElementChild.cloneNode();
+            dupe.appendChild(img)
+            
 
-    document.querySelectorAll('.add').forEach(adder=>{
-        adder.addEventListener('click',ev=>{
-            ev.target.style.animationName=''
-            void ev.target.offsetWidth;
-            ev.target.style.animationName='wiggle'
+
+            dupe.style.position = 'fixed'
+            dupe.style.left = rect.x + 'px'
+            dupe.style.top = rect.y + 'px'
+            dupe.style.transition = '0.4s'
+            midlayerMenu.appendChild(dupe)
+
+            
+            overlayMenu.style.display='block'
+            overlayMenu.style.transform='translate(0,100%)';
+
+            setTimeout(function() {
+               
+                dupe.style.height = '100%'
+                dupe.classList.add('--expanded')
+                dupe.style.left=0
+                dupe.style.top=0
+                overlayMenu.style.transform='translate(0,0)'
+                backButton.style.display='block'
+            }, 1)
         })
-    })
-}init(); 
+    });
 
+    document.querySelectorAll('.add, .favorite, .topnav').forEach(item => {
+        item.addEventListener('click', clickAnimate)
+    })
+}
+init();
+
+function clickAnimate(ev) {
+    ev.target.style.animationName = ''
+    void ev.target.offsetWidth;
+    ev.target.style.animationName = 'wiggle'
+}
 </script>
+
 </html>
