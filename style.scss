@@ -134,7 +134,6 @@
                 }
 
                 .price {
-                    color: $green-black;
                     margin: 0.3em 0;
                 }
 
@@ -226,6 +225,10 @@
                     .subtle {
                         color: #fffc;
                     }
+                    .price{
+                        color: $green-black;
+                    }
+
                 }
             }
 
